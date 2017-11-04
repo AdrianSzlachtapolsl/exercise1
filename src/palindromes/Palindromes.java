@@ -4,35 +4,34 @@
  * and open the template in the editor.
  */
 package palindromes;
+import exceptions.PalindromeException;
+import models.Palindrome;
+
 /**
  *
  * @author Adrian Szlachta
- * @version 1.0;
+ * @version 1.0
  */
 public class Palindromes {
 
     /**
-     * @param args the command line arguments
      * 
+     * @param args Contains all the words of the entered sentence in the form of a string array
      */
     public static void main(String[] args) {
         Palindrome text=new Palindrome(args);
-        Palindromes result= new Palindromes();
-        System.out.println(result.thisIsPalindrome(text));
-
-
-    }
-    /**
-     * 
-     * @param text object from to check
-     * @return string with result information
-     */
-    public String thisIsPalindrome(PalindromeInterface text){
-        if(text.showfinalresult()){
-            return "This is palindrome";
-        }else{
-            return "This is not palindrome";
+        try{
+            if(text.showfinalresult()){
+                System.out.println("This is palindrome");
+            }else{
+                System.out.println("This is not palindrome");
+            }
+        } catch(PalindromeException ex){
+            System.out.println(ex);
         }
+
+
     }
+    
     
 }

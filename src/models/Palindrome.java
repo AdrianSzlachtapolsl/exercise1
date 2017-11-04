@@ -3,40 +3,24 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package palindromes;
-/**
- *
- * @author Adrian Szlachta
- * @version 1.0;
- */
-interface PalindromeInterface{
-    /**
-     * 
-     *  @return return false when text is null and text is not palindrome. 
-     */
-    public boolean showfinalresult();
-}
+package models;
+
+import exceptions.PalindromeException;
 
 /**
  *
  * @author Adrian Szlachta
- * @version 1.0;
- * 
+ * @version 1.0
  */
-
-class Palindrome implements PalindromeInterface{
-    /**
-     * @textPalindrome array of string entered by the user
-     * @joinedTextPalindrome combined texts from array textPalindrome
-     */
-    private String[] textPalindrome;
+public class Palindrome {
+    private final String[] textPalindrome;
     private String joinedTextPalindrome;
     
     /**
     * The constructor deletes the textPalindrome and retrieves array of arguments.
-    * 
+    * @param arguments Contains all the words of the entered sentence in the form of a string array.
     */
-    Palindrome(String[] arguments){
+    public Palindrome(String[] arguments){
         this.textPalindrome=arguments;
         this.joinedTextPalindrome="";
     }
@@ -48,11 +32,10 @@ class Palindrome implements PalindromeInterface{
             this.joinedTextPalindrome=this.joinedTextPalindrome.concat(this.textPalindrome[i]);
         }
     }
+    
     /**
      * Checks whether the combined words are palindromes.
-     * @charsJoinedString chars array  with contain joinedTextPalindrome
-     * @lengthString joinedTextPalindrome text length
-     * @return return true when joinedTextPalindrome have the same characters from front and back or otherwise false
+     * @return return true when joinedTextPalindrome have the same characters from front and back or otherwise false.
      */
     private boolean checkString(){
         createString();
@@ -68,17 +51,21 @@ class Palindrome implements PalindromeInterface{
         
     }
     /**
-     * 
-     * @return return false when text is null and text is not palindrome. 
+     * Checked result method checkString and if length of the string is equals 0 then throw exception. 
+     * @return Return true or false. If string is palindrome return true otherwise false. 
+     * @throws PalindromeException An exception occurs when the length of the string is equal to 0
      */
-    
-    public boolean showfinalresult(){
-        if((checkString()==true)&&(this.joinedTextPalindrome.length()>0)){
+    public boolean showfinalresult() throws PalindromeException{
+         if((checkString()==true)){
+            if(this.joinedTextPalindrome.length()==0){
+                throw new PalindromeException("This text is too short");
+            }else{
             return true;
+            }
         }else{
             return false;
         }
     }
-    
-}
 
+   
+}
